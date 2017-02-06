@@ -177,34 +177,30 @@ body {
   overflow: hidden;
 }
 
-.slider-content .slide-content {
+.slide-content {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-.slider-content .slide {
+.slide {
   position: relative;
   width: 100%;
   height: 100%;
   opacity: 0;
 }
 
-.slider-content .slide:after {
+.slide:after {
   content: "";
   display: table;
   clear: both;
 }
 
-.slider-content .slide.active {
+.slide.active {
   opacity: 1;
 }
 
-.slider-content .slide.active .clip-svg {
-  clip-path: circle(120% at 90%);
-}
-
-.slider-content img {
+img {
   position: absolute;
   display: block;
   width: 55vw;
@@ -213,18 +209,18 @@ body {
   left: 10vw;
 }
 
-.slider-content .title-wrapper {
+.title-wrapper {
   position: absolute;
-  left: 3rem;
-  bottom: 5rem;
+  left: 15em;
+  top: 30vh;
   width: 40%;
 }
 
-.slider-content .title-wrapper.bigger {
+.title-wrapper.bigger {
   width: 48%;
 }
 
-.slider-content .title-wrapper h1 {
+.title-wrapper h1 {
   font-size: 9rem;
   margin: 0;
   line-height: 1;
@@ -232,7 +228,7 @@ body {
   font-weight: 900;
 }
 
-.slider-content .title-wrapper h2 {
+.title-wrapper h2 {
   font-size: 2rem;
   margin: 0;
 }
@@ -260,7 +256,6 @@ body {
   text-transform: uppercase;
   letter-spacing: .38rem;
   white-space: nowrap;
-  color: #1a1a1a;
   background: #fff;
   color: #1a1a1a;
   display: inline-block;
@@ -346,25 +341,16 @@ body {
   font-weight: 700;
 }
 
-.clip-svg {
-  -webkit-clip-path: circle(25px at 90%);
-  clip-path: circle(25px at 90%);
-  width: 100%;
-  height: 100%;
-  -webkit-transition-property: all;
-  transition-property: all;
-  -webkit-transition-duration: 0.5s;
-  transition-duration: 0.5s;
-  -webkit-transition-timing-function: ease;
-  transition-timing-function: ease;
-}
-
 .color-key {
   color: #fff;
 }
 
 .advance-tag {
   font-family: ZSR;
+}
+
+.advance-tag.normal {
+  font-family: KBold;
 }
 
 .descline {
@@ -378,6 +364,29 @@ svg.mask {
   right: 0;
   width: 100%;
   height: 100%;
+}
+
+.button-begin {
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
+  width: 240px;
+  top: 34vh;
+  font-family: HKBold;
+  color: #fff !important;
+  font-size: 2rem !important;
+  border: 10px solid #fff !important;
+  border-radius: 0 !important;
+  height: initial !important;
+  padding: 0 1em !important;
+  display: block !important;
+  opacity: 0;
+}
+
+.button-begin:hover {
+  color: #1a1a1a !important;
+  background: #fff !important;
+  border: 10px solid #1a1a1a !important;
 }
 
 .portfolio-description {
@@ -400,7 +409,8 @@ svg.mask {
   margin: 0 auto;
 }
 
-.animate-in {
+.animate-in,
+.animate-in-late {
   text-align: center;
   position: relative;
   -webkit-background-clip: text;
@@ -413,6 +423,11 @@ svg.mask {
   transition: 0.6s all cubic-bezier(0.86, 0, 0.07, 1) 0.8s;
 }
 
+.fade-in,
+.fade-in-late {
+  transition: 0.6s opac cubic-bezier(0.86, 0, 0.07, 1) 0.8s;
+}
+
 .white-text {
   -webkit-background-clip: text;
   background-clip: text;
@@ -423,7 +438,22 @@ svg.mask {
   background-size: 200% 100%;
 }
 
-.animate-in:after {
+.black-text-fix {
+  color: #1a1a1a;
+}
+
+.black-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  background: -webkit-linear-gradient(0deg, #1a1a1a 50%, transparent 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-position: 100% 0;
+  background-size: 200% 100%;
+}
+
+.animate-in:after,
+.animate-in-late:after {
   content: "";
   height: 100%;
   width: 100%;
@@ -437,20 +467,52 @@ svg.mask {
   transform: scaleX(0);
 }
 
-.white-wipe.animate-in:after {
+.white-wipe.animate-in:after,
+.white-wipe.animate-in-late:after {
   background: #fff;
 }
 
-.animate-in.active {
+.orange-wipe.animate-in:after,
+.orange-wipe.animate-in-late:after {
+  background: #F0B67F;
+}
+
+.black-wipe.animate-in:after,
+.black-wipe.animate-in-late:after {
+  background: #1a1a1a;
+}
+
+.animate-in.active,
+.animate-in-late.active {
   background-position: 0 0;
 }
 
-.animate-in.active:after {
+.fade-in.active,
+.fade-in-late.active {
+  opacity: 1;
+}
+
+.fade-in.stagger-2.active {
+  opacity: 0;
+  animation: opac 0.6s 1.8s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+}
+
+.animate-in.active:after,
+.animate-in-late.active:after {
   animation: anime 1.2s 0.5s cubic-bezier(0.86, 0, 0.07, 1) forwards;
 }
 
 .animate-in.stagger.active:after {
   animation: anime 1.2s 0.8s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+}
+
+@keyframes opac {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes anime {

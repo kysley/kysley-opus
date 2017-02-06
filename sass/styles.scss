@@ -162,6 +162,7 @@ body {
     height: 100vh;
     overflow: hidden;
   }
+}
   .slide-content {
     position: relative;
     width: 100%;
@@ -179,9 +180,6 @@ body {
     }
     &.active {
       opacity: 1;
-      .clip-svg {
-        clip-path: circle(120% at 90%);
-      }
     }
   }
   img {
@@ -194,8 +192,8 @@ body {
   }
   .title-wrapper {
     position: absolute;
-    left: 3rem;
-    bottom: 5rem;
+    left: 15em;
+    top: 30vh;
     width: 40%;
     &.bigger {
       width: 48%;
@@ -212,7 +210,6 @@ body {
       margin: 0;
     }
   }
-}
 .control-nav {
   position: absolute;
   left: 3rem;
@@ -233,7 +230,6 @@ body {
     text-transform: uppercase;
     letter-spacing: .38rem;
     white-space: nowrap;
-    color: #1a1a1a;
     background: $white;
     color: $black;
     display: inline-block;
@@ -249,6 +245,7 @@ body {
   }
 }
 .nav-wrapper {
+  // opacity: 0;
   position: absolute;
   right: 1%;
   top: 42%;
@@ -307,23 +304,14 @@ body {
     font-weight: 700;
   }
 }
-.clip-svg {
-  -webkit-clip-path: circle(25px at 90%);
-          clip-path: circle(25px at 90%);
-  width: 100%;
-  height: 100%;
-  -webkit-transition-property: all;
-  transition-property: all;
-  -webkit-transition-duration: 0.5s;
-          transition-duration: 0.5s;
-  -webkit-transition-timing-function: ease;
-          transition-timing-function: ease;
-}
 .color-key {
   color: $white;
 }
 .advance-tag {
   font-family: ZSR;
+  &.normal {
+    font-family: KBold;
+  }
 }
 .descline {
   font-size: 1rem !important;
@@ -335,6 +323,27 @@ svg.mask {
   right: 0;
   width: 100%;
   height: 100%;
+}
+.button-begin {
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
+  width: 240px;
+  top: 34vh;
+  font-family: HKBold;
+  color: $white !important;
+  font-size: 2rem !important;
+  border: 10px solid $white !important;
+  border-radius: 0 !important;
+  height: initial !important;
+  padding: 0 1em !important;
+  display: block !important;
+  opacity: 0;
+  &:hover {
+    color: $black !important;
+    background: $white !important;
+    border: 10px solid $black !important;
+  }
 }
 .portfolio-description {
   font-family: ZSR;
@@ -356,7 +365,8 @@ svg.mask {
   width: 800px;
   margin: 0 auto;
 }
-.animate-in {
+.animate-in,
+.animate-in-late {
   // display: inline-block;
   text-align: center;
   position: relative;
@@ -369,6 +379,10 @@ svg.mask {
   background-size: 200% 100%;
   transition: 0.6s all cubic-bezier(0.860, 0.000, 0.070, 1.000) 0.8s;
 }
+.fade-in,
+.fade-in-late {
+  transition: 0.6s opac cubic-bezier(0.860, 0.000, 0.070, 1.000) 0.8s;
+}
 .white-text {
   -webkit-background-clip: text;
   background-clip: text;
@@ -378,7 +392,20 @@ svg.mask {
   background-position: 100% 0;
   background-size: 200% 100%;
 }
-.animate-in:after {
+.black-text-fix {
+  color: $black;
+}
+.black-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  background: -webkit-linear-gradient(0deg, $black 50%, transparent 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-position: 100% 0;
+  background-size: 200% 100%;
+}
+.animate-in:after,
+.animate-in-late:after {
   content: "";
   height: 100%;
   width: 100%;
@@ -386,21 +413,50 @@ svg.mask {
   z-index: 2;
   display: block;
   position: absolute;
-  top: 0;left: 0;
+  top: 0;
+  left: 0;
   transform-origin: left;
   transform: scaleX(0);
 }
-.white-wipe.animate-in:after {
+.white-wipe.animate-in:after,
+.white-wipe.animate-in-late:after {
   background: $white;
 }
-.animate-in.active {
+.orange-wipe.animate-in:after,
+.orange-wipe.animate-in-late:after {
+  background: $orange;
+}
+.black-wipe.animate-in:after,
+.black-wipe.animate-in-late:after {
+  background: $black;
+}
+
+.animate-in.active,
+.animate-in-late.active {
   background-position: 0 0;
 }
-.animate-in.active:after {
-    animation: anime 1.2s 0.5s cubic-bezier(0.860, 0.000, 0.070, 1.000) forwards;
+.fade-in.active,
+.fade-in-late.active {
+  opacity: 1;
+}
+.fade-in.stagger-2.active {
+  opacity: 0;
+  animation: opac 0.6s 1.8s cubic-bezier(0.860, 0.000, 0.070, 1.000) forwards;
+}
+.animate-in.active:after,
+.animate-in-late.active:after {
+  animation: anime 1.2s 0.5s cubic-bezier(0.860, 0.000, 0.070, 1.000) forwards;
 }
 .animate-in.stagger.active:after {
   animation: anime 1.2s 0.8s cubic-bezier(0.860, 0.000, 0.070, 1.000) forwards;
+}
+@keyframes opac {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 @keyframes anime {
   0% {

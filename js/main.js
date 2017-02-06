@@ -54,7 +54,7 @@ $('.hamburger-menu, .link').click(function() {
 var projects = [{key: 1, value: 'i. offshoreclothing'}, {key: 2, value: 'ii. tempest'}, {key: 3, value: 'iii. crncy'}, {key: 4, value: 'iv. rgb/hex'}, {key: 5, value: 'v. white&red'}, {key: 6, value:'vi. other'}];
 var mySlider = {
   config: {
-    slider: '.slider-content',
+    slider: '.slide-content',
     activeSlide: '.slide.active',
     button: '.next-button',
     transition: 600,
@@ -66,6 +66,7 @@ var mySlider = {
   init : function(config) {
         //$.extend(mySlider.config, config);
         this.createNav();
+        console.log("init");
         $(mySlider.config.button).
             click(function() {
                 mySlider.animateSlide($(this));
@@ -117,6 +118,7 @@ var mySlider = {
 
   createNav : function() {
     var totalSlides = $(mySlider.config.slider).find('.slide').length;
+    console.log(totalSlides);
     var controlNav = $(mySlider.config.navigation).find('ul');
     var nav;
 
