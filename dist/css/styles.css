@@ -247,6 +247,7 @@ img {
 }
 
 .control-nav li {
+  cursor: cell;
   height: 2.2rem;
   padding: 0 1rem;
   font-size: .8rem;
@@ -276,7 +277,7 @@ img {
   right: 1%;
   top: 42%;
   text-align: left;
-  cursor: pointer;
+  /* cursor: pointer; */
   z-index: 999;
   width: 12%;
 }
@@ -299,13 +300,31 @@ img {
   text-transform: uppercase;
 }
 
+.nav-wrapper .prev-button {
+  position: relative;
+  padding-top: 8%;
+  left: 35%;
+  transform: rotate(180deg);
+  transform-origin: 20% 11%;
+  cursor: n-resize;
+  width: 20px;
+}
+
+.nav-wrapper .prev-button svg {
+  width: 100%;
+  height: 100%;
+  fill: #fff;
+}
+
 .nav-wrapper .next-button {
   position: relative;
   padding-top: 8%;
+  cursor: n-resize;
+  width: 20px;
 }
 
 .nav-wrapper .next-button svg {
-  width: 7%;
+  width: 100%;
   height: 100%;
   fill: #fff;
 }

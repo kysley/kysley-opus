@@ -13,18 +13,22 @@ e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&
  */
 !function(t){"use strict";"function"==typeof define&&define.amd?define(["jquery"],t):"object"==typeof exports?module.exports=t(require("jquery")):t(jQuery)}(function(t){"use strict";var n="animsition",i={init:function(a){a=t.extend({inClass:"fade-in",outClass:"fade-out",inDuration:1500,outDuration:800,linkElement:".animsition-link",loading:!0,loadingParentElement:"body",loadingClass:"animsition-loading",loadingInner:"",timeout:!1,timeoutCountdown:5e3,onLoadEvent:!0,browser:["animation-duration","-webkit-animation-duration"],overlay:!1,overlayClass:"animsition-overlay-slide",overlayParentElement:"body",transition:function(t){window.location.href=t}},a),i.settings={timer:!1,data:{inClass:"animsition-in-class",inDuration:"animsition-in-duration",outClass:"animsition-out-class",outDuration:"animsition-out-duration",overlay:"animsition-overlay"},events:{inStart:"animsition.inStart",inEnd:"animsition.inEnd",outStart:"animsition.outStart",outEnd:"animsition.outEnd"}};var o=i.supportCheck.call(this,a);if(!o&&a.browser.length>0&&(!o||!this.length))return"console"in window||(window.console={},window.console.log=function(t){return t}),this.length||console.log("Animsition: Element does not exist on page."),o||console.log("Animsition: Does not support this browser."),i.destroy.call(this);var e=i.optionCheck.call(this,a);return e&&t("."+a.overlayClass).length<=0&&i.addOverlay.call(this,a),a.loading&&t("."+a.loadingClass).length<=0&&i.addLoading.call(this,a),this.each(function(){var o=this,e=t(this),s=t(window),r=t(document),l=e.data(n);l||(a=t.extend({},a),e.data(n,{options:a}),a.timeout&&i.addTimer.call(o),a.onLoadEvent&&s.on("load."+n,function(){i.settings.timer&&clearTimeout(i.settings.timer),i["in"].call(o)}),s.on("pageshow."+n,function(t){t.originalEvent.persisted&&i["in"].call(o)}),s.on("unload."+n,function(){}),r.on("click."+n,a.linkElement,function(n){n.preventDefault();var a=t(this),e=a.attr("href");2===n.which||n.metaKey||n.shiftKey||-1!==navigator.platform.toUpperCase().indexOf("WIN")&&n.ctrlKey?window.open(e,"_blank"):i.out.call(o,a,e)}))})},addOverlay:function(n){t(n.overlayParentElement).prepend('<div class="'+n.overlayClass+'"></div>')},addLoading:function(n){t(n.loadingParentElement).append('<div class="'+n.loadingClass+'">'+n.loadingInner+"</div>")},removeLoading:function(){var i=t(this),a=i.data(n).options,o=t(a.loadingParentElement).children("."+a.loadingClass);o.fadeOut().remove()},addTimer:function(){var a=this,o=t(this),e=o.data(n).options;i.settings.timer=setTimeout(function(){i["in"].call(a),t(window).off("load."+n)},e.timeoutCountdown)},supportCheck:function(n){var i=t(this),a=n.browser,o=a.length,e=!1;0===o&&(e=!0);for(var s=0;o>s;s++)if("string"==typeof i.css(a[s])){e=!0;break}return e},optionCheck:function(n){var a,o=t(this);return a=n.overlay||o.data(i.settings.data.overlay)?!0:!1},animationCheck:function(i,a,o){var e=t(this),s=e.data(n).options,r=typeof i,l=!a&&"number"===r,d=a&&"string"===r&&i.length>0;return l||d?i=i:a&&o?i=s.inClass:!a&&o?i=s.inDuration:a&&!o?i=s.outClass:a||o||(i=s.outDuration),i},"in":function(){var a=this,o=t(this),e=o.data(n).options,s=o.data(i.settings.data.inDuration),r=o.data(i.settings.data.inClass),l=i.animationCheck.call(a,s,!1,!0),d=i.animationCheck.call(a,r,!0,!0),u=i.optionCheck.call(a,e),c=o.data(n).outClass;e.loading&&i.removeLoading.call(a),c&&o.removeClass(c),u?i.inOverlay.call(a,d,l):i.inDefault.call(a,d,l)},inDefault:function(n,a){var o=t(this);o.css({"animation-duration":a+"ms"}).addClass(n).trigger(i.settings.events.inStart).animateCallback(function(){o.removeClass(n).css({opacity:1}).trigger(i.settings.events.inEnd)})},inOverlay:function(a,o){var e=t(this),s=e.data(n).options;e.css({opacity:1}).trigger(i.settings.events.inStart),t(s.overlayParentElement).children("."+s.overlayClass).css({"animation-duration":o+"ms"}).addClass(a).animateCallback(function(){e.trigger(i.settings.events.inEnd)})},out:function(a,o){var e=this,s=t(this),r=s.data(n).options,l=a.data(i.settings.data.outClass),d=s.data(i.settings.data.outClass),u=a.data(i.settings.data.outDuration),c=s.data(i.settings.data.outDuration),m=l?l:d,g=u?u:c,f=i.animationCheck.call(e,m,!0,!1),v=i.animationCheck.call(e,g,!1,!1),h=i.optionCheck.call(e,r);s.data(n).outClass=f,h?i.outOverlay.call(e,f,v,o):i.outDefault.call(e,f,v,o)},outDefault:function(a,o,e){var s=t(this),r=s.data(n).options;s.css({"animation-duration":o+1+"ms"}).addClass(a).trigger(i.settings.events.outStart).animateCallback(function(){s.trigger(i.settings.events.outEnd),r.transition(e)})},outOverlay:function(a,o,e){var s=this,r=t(this),l=r.data(n).options,d=r.data(i.settings.data.inClass),u=i.animationCheck.call(s,d,!0,!0);t(l.overlayParentElement).children("."+l.overlayClass).css({"animation-duration":o+1+"ms"}).removeClass(u).addClass(a).trigger(i.settings.events.outStart).animateCallback(function(){r.trigger(i.settings.events.outEnd),l.transition(e)})},destroy:function(){return this.each(function(){var i=t(this);t(window).off("."+n),i.css({opacity:1}).removeData(n)})}};t.fn.animateCallback=function(n){var i="animationend webkitAnimationEnd";return this.each(function(){var a=t(this);a.on(i,function(){return a.off(i),n.call(this)})})},t.fn.animsition=function(a){return i[a]?i[a].apply(this,Array.prototype.slice.call(arguments,1)):"object"!=typeof a&&a?void t.error("Method "+a+" does not exist on jQuery."+n):i.init.apply(this,arguments)}});
 var keys = {37: 1, 38: 1, 39: 1, 40: 1};
-var projects = [{key: 1, value: 'i. offshoreclothing'}, {key: 2, value: 'ii. tempest'}, {key: 3, value: 'iii. crncy'}, {key: 4, value: 'iv. rgb/hex'}, {key: 5, value: 'v. white&red'}, {key: 6, value:'vi. other'}];
+var projects = [{key: 0, value: 'prelude'}, {key: 1, value: 'i. offshoreclothing'}, {key: 2, value: 'ii. tempest'}, {key: 3, value: 'iii. crncy'}, {key: 4, value: 'iv. rgb/hex'}, {key: 5, value: 'v. white&red'}, {key: 6, value:'vi. other'}];
 var mySlider = {
   config: {
-    currentSlide: 1,
+    currentSlide: 0,
     totalSlides: projects.length,
     setupSpaceComplete: false,
+    transitioning: false,
+    scrollThreshold: 400,
+    lastFixedPos: 0,
     slider: '.row',
     activeSlide: '.slide.active',
     button: '.next-button',
-    buttonSpace: '.nav-wrapper',
+    // buttonSpace: '.nav-wrapper',
     buttonAlt: '.slider-nav',
     buttonBegin: '.button-begin',
+    buttonUp: '.prev-button',
     animated: '.effect',
     transition: 600,
     delay: function() {return this.transition;},
@@ -36,11 +40,40 @@ var mySlider = {
     //$.extend(mySlider.config, config);
     mySlider.disableScroll();
     this.createNav();
-    $('.slide').scroll(function() {
-      if($(this).scrollTop() >= 100 && mySlider.config.setupSpaceComplete)
-        mySlider.animateSlide($(mySlider.config.button));
-    })
-    $(mySlider.config.buttonSpace).
+    var y = '';
+    $(window).on('wheel', function(e) {
+
+      var delta = e.originalEvent.deltaY;
+      if( delta > 0 ) y = 'down';
+      else y = 'up';
+
+      var diff = Math.abs($(this).scrollTop() - mySlider.config.lastFixedPos);
+      if( diff > mySlider.config.scrollThreshold && mySlider.config.setupSpaceComplete && !mySlider.config.transitioning ) {
+        if( y == 'up' ) {
+            mySlider.config.lastFixedPos = $(this).scrollTop();
+            mySlider.disableScroll();
+            mySlider.config.transitioning = true;
+            mySlider.animateSlideBack($(mySlider.config.buttonUp));
+            } else {
+            console.log('scrolled down ');
+            mySlider.disableScroll();
+            console.log("Saving last scroll amount");
+            mySlider.config.lastFixedPos = $(this).scrollTop();
+            console.log('Last fixed position: ' + mySlider.config.lastFixedPos);
+            console.log("Animating slides");
+            mySlider.config.transitioning = true;
+            mySlider.animateSlide($(mySlider.config.button));
+              // mySlider.disableScroll();
+              // console.log("Saving last scroll amount");
+              // mySlider.config.lastFixedPos = $(this).scrollTop();
+              // console.log('Last fixed position: ' + mySlider.config.lastFixedPos);
+              // console.log("Animating slides");
+              // mySlider.config.transitioning = true;
+              // mySlider.animateSlideBack($(mySlider.config.button));
+          }
+        }
+    });
+    $(mySlider.config.button).
         click(function() {
           mySlider.animateSlide($(mySlider.config.button));
     });
@@ -48,7 +81,10 @@ var mySlider = {
       click(function(e) {
         mySlider.animateToX($(this), e);
     });
-
+    $(mySlider.config.buttonUp).
+    click(function() {
+      mySlider.animateSlideBack($(mySlider.config.buttonUp));
+    });
     $(mySlider.config.buttonBegin).
       click(function() {
         mySlider.setupSpace();
@@ -70,21 +106,23 @@ var mySlider = {
   },
 
   disableScroll : function() {
-   if (window.addEventListener) // older FF
-       window.addEventListener('DOMMouseScroll', mySlider.preventDefault, false);
-   window.onwheel = mySlider.preventDefault; // modern standard
-   window.onmousewheel = document.onmousewheel = mySlider.preventDefault; // older browsers, IE
-   window.ontouchmove  = mySlider.preventDefault; // mobile
-   document.onkeydown  = mySlider.preventDefaultForKeys;
+  if (window.addEventListener) // older FF
+    window.addEventListener('DOMMouseScroll', mySlider.preventDefault, false);
+  window.onwheel = mySlider.preventDefault; // modern standard
+  window.onmousewheel = document.onmousewheel = mySlider.preventDefault; // older browsers, IE
+  window.ontouchmove  = mySlider.preventDefault; // mobile
+  document.onkeydown  = mySlider.preventDefaultForKeys;
+  console.log('Disabling scroll');
  },
 
  enableScroll : function () {
   if (window.removeEventListener)
-      window.removeEventListener('DOMMouseScroll', mySlider.preventDefault, false);
+    window.removeEventListener('DOMMouseScroll', mySlider.preventDefault, false);
   window.onmousewheel = document.onmousewheel = null;
   window.onwheel = null;
   window.ontouchmove = null;
   document.onkeydown = null;
+  console.log('Enabling scroll');
  },
 
   setupSpace : function() {
@@ -99,24 +137,38 @@ var mySlider = {
       $('.control-nav').addClass('active').css('position', 'fixed');
       mySlider.config.setupSpaceComplete = true;
     }, 1700);
-
-
   },
 
   getActiveSlide : function() {
-    return $(mySlider.config.currentSlide);
+    return mySlider.config.currentSlide;
+  },
+
+  getPrevSlide : function() {
+    var prevSlide = mySlider.getActiveSlide() - 1;
+
+    if( mySlider.getActiveSlide() == 0 ) {
+      prevSlide = 0;
+    }
+    return prevSlide;
   },
 
   getNextSlide : function() {
-    var nextSlide = mySlider.getActiveSlide()[0] + 1;
+    var nextSlide = mySlider.getActiveSlide() + 1;
 
-    if (nextSlide.length > mySlider.config.totalSlides) {
+    if (nextSlide.length >= mySlider.config.totalSlides) {
       console.log("next slide greater than total");
       // nextSlide = $('.columns').find('.slide').eq(0);
-      nextSlide = 1;
+      nextSlide = 0;
     }
     return nextSlide;
   },
+
+  numberToObj : function(slideNum) {
+    var _this = $('body').find("[data-order='" + slideNum + "']")[0];
+
+    return $(_this);
+  },
+
   getXSlideColorAndName: function(nextSlide) {
     var colorAndName = {};
     var nextSlidenext = nextSlide;
@@ -148,9 +200,11 @@ var mySlider = {
 
   getNextSlideColorAndName: function() {
     var colorAndName = {};
-    var nextSlidenext = mySlider.getNextSlide().next();
+    var nextSlidenext = mySlider.numberToObj(mySlider.getNextSlide());
+    console.log(nextSlidenext);
     var nextSlideColor = nextSlidenext.data('color');
     var nextSlideName = nextSlidenext.data('name');
+    console.log(nextSlideName);
     var nextSlideBackground = nextSlidenext.data('background');
     var nextSlideText = nextSlidenext.data('text');
 
@@ -176,20 +230,21 @@ var mySlider = {
   },
 
   createNav : function() {
-    var totalSlides = $(mySlider.config.slider).find('.slide').length;
+    // var totalSlides = $(mySlider.config.slider).find('.slide').length;
+    var totalSlides = mySlider.config.totalSlides;
     console.log("total slides: " + totalSlides);
     var controlNav = $(mySlider.config.navigation).find('ul');
     var nav;
 
     for( var i = 0; i < totalSlides; i++ ){
 
-      var correctI = i + 1;
+      // var correctI = i + 1;
       var active = '';
       if( i === 0 ){
         active = 'active';
       }
 
-      controlNav.append('<li class="slider-nav nav-'+ i + ' '+ active + ' " data-order-menu="' + correctI +'">' + projects[i].value + '</li>');
+      controlNav.append('<li class="slider-nav nav-'+ i + ' '+ active + ' " data-order-menu="' + i +'">' + projects[i].value + '</li>');
     }
   },
 
@@ -200,6 +255,14 @@ var mySlider = {
     if( nextNav.length === 0 ){
       nextNav = $('.control-nav li').eq(0);
     }
+
+    activeNav.removeClass('active');
+    nextNav.addClass('active');
+  },
+
+  animateNavBack : function() {
+    var activeNav = $('li.active');
+    var nextNav = activeNav.prev();
 
     activeNav.removeClass('active');
     nextNav.addClass('active');
@@ -230,6 +293,7 @@ var mySlider = {
     var anchor = buttonAlt.data('order-menu');
     console.log("next anchor jump: " + anchor);
     var _this = $('body').find("[data-order='" + anchor + "']")[0];
+    var _activeSlide = $('body').find("[data-order='" + activeSlide[0] + "']");
     console.log(_this);
     console.log($(_this).offset().top);
 
@@ -240,45 +304,83 @@ var mySlider = {
       }, 1500, $.bez([0.165, 0.84, 0.44, 1]));
     }
 
-    // clipPath.css('transition-duration', mySlider.config.transition + 'ms');
-    // clipPath.css('color', mySlider.getNextSlideColorAndName().background);
     buttonAlt.css('pointer-events', 'none');
     nextSlide.css('z-index', 10);
-    // button.css('background', mySlider.getNextSlideColorAndName().color);
-    // mainText.css('color', mySlider.getNextSlideColorAndName().text);
-    // buttonAlt.prev().find('.color').html(mySlider.getXSlideColorAndName(nextSlide).name);
     $(_this).addClass('active').css('opacity', 1);
 
     setTimeout(function() {
-      activeSlide.removeClass('active').css('opacity', 0);
+      _activeSlide.removeClass('active').css('opacity', 0);
     }, delay-600);
 
     setTimeout(function() {
       nextSlide.css('z-index', '');
-      button.css('pointer-events', 'auto');
+      buttonAlt.css('pointer-events', 'auto');
     },delay + 300)
 
     mySlider.animateXNav(nextSlide);
   },
-
-  animateSlide : function(button) {
+  animateSlideBack : function(button) {
     var activeSlide = mySlider.getActiveSlide();
-    var nextSlide = mySlider.getNextSlide();
+    console.log('active slide: ' + activeSlide);
+    var prevSlide = mySlider.getPrevSlide();
+    console.log('prev slide: ' + prevSlide);
     var delay = mySlider.config.delay();
     var mainText = $(mySlider.config.mainText);
     var buttonSpace = $(mySlider.config.buttonSpace);
     var animateMe = $(mySlider.config.animated);
-    // this is the next slide vvvv
+
+    var _this = $('body').find("[data-order='" + prevSlide + "']")[0];
+    var _activeSlide = $('body').find("[data-order='" + activeSlide[0] + "']");
+
+    buttonSpace.css('pointer-events', 'none');
+    $(_this).css('z-index', 10);
+    // button.prev().find('.normal').html(mySlider.getNextSlideColorAndName().name);
+    $(_this).addClass('active').css('opacity', 1);
+    animateMe.addClass('active');
+
+    console.log("next slide: " + prevSlide);
+
+    $('html,body').stop().animate({
+      scrollTop: $(_this).offset().top
+    }, 1500, $.bez([0.165, 0.84, 0.44, 1]));
+
+    setTimeout(function() {
+      _activeSlide.removeClass('active').css('opacity', 0);
+    }, delay-600);
+
+    setTimeout(function() {
+      $(_this).css('z-index', '');
+      buttonSpace.css('pointer-events', 'auto');
+      mySlider.enableScroll();
+
+    }, delay)
+
+    setTimeout(function() {
+      mySlider.config.transitioning = false;
+    }, delay + 1000)
+
+    mySlider.config.currentSlide -= 1;
+    mySlider.animateNavBack();
+
+  },
+  animateSlide : function(button) {
+    var activeSlide = mySlider.getActiveSlide();
+    console.log("active slide: " + activeSlide);
+    var nextSlide = mySlider.getNextSlide();
+    console.log("next slide: " + nextSlide);
+    var delay = mySlider.config.delay();
+    var mainText = $(mySlider.config.mainText);
+    var buttonSpace = $(mySlider.config.buttonSpace);
+    var animateMe = $(mySlider.config.animated);
+    // Next Slide
     var _this = $('body').find("[data-order='" + nextSlide + "']")[0];
-    // this is the active slide vvvv
+    // Active Slide
     var _activeSlide = $('body').find("[data-order='" + activeSlide[0] + "']");
 
 
     buttonSpace.css('pointer-events', 'none');
     $(_this).css('z-index', 10);
-    // button.css('background', mySlider.getNextSlideColorAndName().color);
-    // mainText.css('color', mySlider.getNextSlideColorAndName().text);
-    // button.prev().find('.color').html(mySlider.getNextSlideColorAndName().name);
+    button.prev().find('.normal').html(mySlider.getNextSlideColorAndName().name);
     $(_this).addClass('active').css('opacity', 1);
     animateMe.addClass('active');
 
@@ -295,7 +397,13 @@ var mySlider = {
     setTimeout(function() {
       $(_this).css('z-index', '');
       buttonSpace.css('pointer-events', 'auto');
-    },delay)
+      mySlider.enableScroll();
+
+    }, delay)
+
+    setTimeout(function() {
+      mySlider.config.transitioning = false;
+    }, delay + 1000)
 
     mySlider.config.currentSlide += 1;
     mySlider.animateNav();
