@@ -205,15 +205,16 @@ img {
   display: block;
   width: 55vw;
   max-height: 100vh;
-  top: 10vh;
-  left: 10vw;
+  top: 34vh;
+  left: 24vw;
+  opacity: 0;
 }
 
 .title-wrapper {
   position: absolute;
-  left: 15em;
-  top: 30vh;
-  width: 40%;
+  left: 30em;
+  top: 7vh;
+  width: 35%;
 }
 
 .title-wrapper.bigger {
@@ -230,7 +231,7 @@ img {
 
 .title-wrapper h2 {
   font-size: 2rem;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .control-nav {
@@ -319,7 +320,7 @@ img {
 .nav-wrapper .next-button {
   position: relative;
   padding-top: 8%;
-  cursor: n-resize;
+  cursor: s-resize;
   width: 20px;
 }
 
@@ -360,6 +361,10 @@ img {
   font-weight: 700;
 }
 
+.always-shown {
+  opacity: 1 !important;
+}
+
 .color-key {
   color: #fff;
 }
@@ -375,6 +380,7 @@ img {
 .descline {
   font-size: 1rem !important;
   font-family: ZSR;
+  width: 100px;
 }
 
 svg.mask {
@@ -457,8 +463,14 @@ svg.mask {
   background-size: 200% 100%;
 }
 
-.black-text-fix {
-  color: #1a1a1a;
+.green-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  background: -webkit-linear-gradient(0deg, #99EDCC 50%, transparent 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-position: 100% 0;
+  background-size: 200% 100%;
 }
 
 .black-text {
@@ -469,6 +481,30 @@ svg.mask {
   -webkit-text-fill-color: transparent;
   background-position: 100% 0;
   background-size: 200% 100%;
+}
+
+.orange-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  background: -webkit-linear-gradient(0deg, #F0B67F 50%, transparent 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-position: 100% 0;
+  background-size: 200% 100%;
+}
+
+.blue-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  background: -webkit-linear-gradient(0deg, #9AC4F8 50%, transparent 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-position: 100% 0;
+  background-size: 200% 100%;
+}
+
+.black-text-fix {
+  color: #1a1a1a;
 }
 
 .animate-in:after,
@@ -499,6 +535,16 @@ svg.mask {
 .black-wipe.animate-in:after,
 .black-wipe.animate-in-late:after {
   background: #1a1a1a;
+}
+
+.green-wipe.animate-in:after,
+.green-wipe.animate-in-late:after {
+  background: #99EDCC;
+}
+
+.blue-wipe.animate-in:after,
+.blue-wipe.animate-in-late:after {
+  background: #9AC4F8;
 }
 
 .animate-in.active,

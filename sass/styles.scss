@@ -187,14 +187,15 @@ body {
     display: block;
     width: 55vw;
     max-height: 100vh;
-    top: 10vh;
-    left: 10vw;
+    top: 34vh;
+    left: 24vw;
+    opacity: 0;
   }
   .title-wrapper {
     position: absolute;
-    left: 15em;
-    top: 30vh;
-    width: 40%;
+    left: 30em;
+    top: 7vh;
+    width: 35%;
     &.bigger {
       width: 48%;
     }
@@ -207,7 +208,7 @@ body {
     }
     h2 {
       font-size: 2rem;
-      margin: 0;
+      margin: 0 auto;
     }
   }
 .control-nav {
@@ -286,7 +287,7 @@ body {
   .next-button {
     position: relative;
     padding-top: 8%;
-    cursor: n-resize;
+    cursor: s-resize;
     width: 20px;
     svg {
       width: 100%;
@@ -321,6 +322,9 @@ body {
     font-weight: 700;
   }
 }
+.always-shown {
+  opacity: 1 !important;
+}
 .color-key {
   color: $white;
 }
@@ -333,6 +337,7 @@ body {
 .descline {
   font-size: 1rem !important;
   font-family: ZSR;
+  width: 100px;
 }
 svg.mask {
   position: absolute;
@@ -409,8 +414,14 @@ svg.mask {
   background-position: 100% 0;
   background-size: 200% 100%;
 }
-.black-text-fix {
-  color: $black;
+.green-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  background: -webkit-linear-gradient(0deg, $green 50%, transparent 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-position: 100% 0;
+  background-size: 200% 100%;
 }
 .black-text {
   -webkit-background-clip: text;
@@ -420,6 +431,27 @@ svg.mask {
   -webkit-text-fill-color: transparent;
   background-position: 100% 0;
   background-size: 200% 100%;
+}
+.orange-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  background: -webkit-linear-gradient(0deg, $orange 50%, transparent 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-position: 100% 0;
+  background-size: 200% 100%;
+}
+.blue-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  background: -webkit-linear-gradient(0deg, $blue 50%, transparent 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-position: 100% 0;
+  background-size: 200% 100%;
+}
+.black-text-fix {
+  color: $black;
 }
 .animate-in:after,
 .animate-in-late:after {
@@ -447,7 +479,14 @@ svg.mask {
 .black-wipe.animate-in-late:after {
   background: $black;
 }
-
+.green-wipe.animate-in:after,
+.green-wipe.animate-in-late:after {
+  background: $green;
+}
+.blue-wipe.animate-in:after,
+.blue-wipe.animate-in-late:after {
+  background: $blue;
+}
 .animate-in.active,
 .animate-in-late.active {
   background-position: 0 0;
