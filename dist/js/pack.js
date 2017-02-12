@@ -255,13 +255,12 @@ var mySlider = {
   },
 
   animateSlideContent : function(nextSlideObj, delay) {
-
     setTimeout(function() {
       mySlider.config.transitioning = false;
       nextSlideObj.find('.animate-in-late').addClass('active');
       nextSlideObj.find('.fade-in-late').addClass('active');
       mySlider.enableScroll();
-    }, delay + 400);
+    }, delay);
   },
 
   animateToX : function(buttonAlt, e) {
@@ -319,11 +318,13 @@ var mySlider = {
     var animateMe = $(mySlider.config.animated);
 
     var _this = mySlider.numberToObj(prevSlide);
-    var _activeSlide = $('body').find("[data-order='" + activeSlide[0] + "']");
+    var _activeSlide = $('body').find("[data-order='" + activeSlide + "']");
 
     buttonSpace.css('pointer-events', 'none');
     $(_this).css('z-index', 10);
-    $(_this).addClass('active').css('opacity', 1);
+    $(_this).addClass('active');
+    button.find('.normal').html(mySlider.getNextSlideColorAndName().name);
+
     animateMe.addClass('active');
 
     console.log("next slide: " + prevSlide);
@@ -333,8 +334,9 @@ var mySlider = {
     }, 1500, $.bez([0.165, 0.84, 0.44, 1]));
 
     setTimeout(function() {
-      _activeSlide.removeClass('active').css('opacity', 0);
-    }, delay - 600);
+      _activeSlide.find('.slide-content').addClass('out');
+      _this.find('.slide-content').removeClass('out');
+    }, delay - 500);
 
     setTimeout(function() {
       $(_this).css('z-index', '');
@@ -363,11 +365,10 @@ var mySlider = {
     // Active Slide
     var _activeSlide = $('body').find("[data-order='" + activeSlide + "']");
 
-
     buttonSpace.css('pointer-events', 'none');
     $(_this).css('z-index', 10);
     button.prev().find('.normal').html(mySlider.getNextSlideColorAndName().name);
-    $(_this).addClass('active').css('opacity', 1);
+    $(_this).addClass('active');
     animateMe.addClass('active');
 
     console.log("next slide: " + nextSlide);
@@ -377,8 +378,9 @@ var mySlider = {
     }, 1500, $.bez([0.165, 0.84, 0.44, 1]));
 
     setTimeout(function() {
-      _activeSlide.removeClass('active').css('opacity', 0);
-    }, delay - 600);
+      _activeSlide.find('.slide-content').addClass('out');
+      _this.find('.slide-content').removeClass('out');
+    }, delay - 500);
 
     setTimeout(function() {
       $(_this).css('z-index', '');
