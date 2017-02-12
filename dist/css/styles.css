@@ -42,14 +42,17 @@ body {
 }
 
 * {
+  /*Instead of the line below you could use @include box-sizing($bs)*/
   box-sizing: border-box;
 }
 
 *::after {
+  /*Instead of the line below you could use @include box-sizing($bs)*/
   box-sizing: border-box;
 }
 
 *::before {
+  /*Instead of the line below you could use @include box-sizing($bs)*/
   box-sizing: border-box;
 }
 
@@ -183,12 +186,17 @@ body {
   width: 100%;
   height: 100%;
   opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
+  -webkit-transition: opacity 500ms 0ms, -webkit-transform;
+  transition: opacity 500ms 0ms, -webkit-transform;
   transition: opacity 500ms 0ms, transform;
+  transition: opacity 500ms 0ms, transform, -webkit-transform;
 }
 
 .slide-content.out {
   opacity: 0;
+  -webkit-transform: translate3d(0, -30px, 0);
   transform: translate3d(0, -30px, 0);
 }
 
@@ -316,7 +324,9 @@ img {
   position: relative;
   padding-top: 8%;
   left: 35%;
+  -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
+  -webkit-transform-origin: 20% 11%;
   transform-origin: 20% 11%;
   cursor: n-resize;
   width: 20px;
@@ -374,7 +384,9 @@ img {
 
 .opus-container span {
   position: absolute;
+  -webkit-transform: rotate(-90deg);
   transform: rotate(-90deg);
+  -webkit-transform-origin: 0% 0%;
   transform-origin: 0% 0%;
   color: #9AC4F8;
   left: 40vw;
@@ -487,12 +499,15 @@ svg.mask {
   position: relative;
   text-align: center;
   top: 30vh;
+  /* left: 41vw;*/
+  /* color: $yellow;*/
   width: 800px;
   margin: 0 auto;
 }
 
 .animate-in,
 .animate-in-late {
+  /* display: inline-block;*/
   text-align: center;
   position: relative;
   -webkit-background-clip: text;
@@ -502,11 +517,13 @@ svg.mask {
   -webkit-text-fill-color: transparent;
   background-position: 100% 0;
   background-size: 200% 100%;
+  -webkit-transition: 0.6s all cubic-bezier(0.86, 0, 0.07, 1) 0.8s;
   transition: 0.6s all cubic-bezier(0.86, 0, 0.07, 1) 0.8s;
 }
 
 .fade-in,
 .fade-in-late {
+  -webkit-transition: 0.6s opac cubic-bezier(0.86, 0, 0.07, 1) 0.8s;
   transition: 0.6s opac cubic-bezier(0.86, 0, 0.07, 1) 0.8s;
 }
 
@@ -575,7 +592,9 @@ svg.mask {
   position: absolute;
   top: 0;
   left: 0;
+  -webkit-transform-origin: left;
   transform-origin: left;
+  -webkit-transform: scaleX(0);
   transform: scaleX(0);
 }
 
@@ -612,21 +631,34 @@ svg.mask {
 .fade-in.active,
 .fade-in-late.active {
   opacity: 0;
+  -webkit-animation: opac 0.6s 0.5s cubic-bezier(0.86, 0, 0.07, 1) forwards;
   animation: opac 0.6s 0.5s cubic-bezier(0.86, 0, 0.07, 1) forwards;
 }
 
 .fade-in.stagger-2.active {
   opacity: 0;
+  -webkit-animation: opac 0.6s 1.8s cubic-bezier(0.86, 0, 0.07, 1) forwards;
   animation: opac 0.6s 1.8s cubic-bezier(0.86, 0, 0.07, 1) forwards;
 }
 
 .animate-in.active:after,
 .animate-in-late.active:after {
+  -webkit-animation: anime 1.2s 0.5s cubic-bezier(0.86, 0, 0.07, 1) forwards;
   animation: anime 1.2s 0.5s cubic-bezier(0.86, 0, 0.07, 1) forwards;
 }
 
 .animate-in.stagger.active:after {
+  -webkit-animation: anime 1.2s 0.8s cubic-bezier(0.86, 0, 0.07, 1) forwards;
   animation: anime 1.2s 0.8s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+}
+
+@-webkit-keyframes opac {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes opac {
@@ -638,20 +670,52 @@ svg.mask {
   }
 }
 
-@keyframes anime {
+@-webkit-keyframes anime {
   0% {
+    -webkit-transform-origin: left;
     transform-origin: left;
+    -webkit-transform: scaleX(0);
     transform: scaleX(0);
   }
   50% {
+    -webkit-transform-origin: left;
     transform-origin: left;
+    -webkit-transform: scaleX(1);
     transform: scaleX(1);
   }
   51% {
+    -webkit-transform-origin: right;
     transform-origin: right;
   }
   100% {
+    -webkit-transform-origin: right;
     transform-origin: right;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+  }
+}
+
+@keyframes anime {
+  0% {
+    -webkit-transform-origin: left;
+    transform-origin: left;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+  }
+  50% {
+    -webkit-transform-origin: left;
+    transform-origin: left;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+  51% {
+    -webkit-transform-origin: right;
+    transform-origin: right;
+  }
+  100% {
+    -webkit-transform-origin: right;
+    transform-origin: right;
+    -webkit-transform: scaleX(0);
     transform: scaleX(0);
   }
 }
