@@ -24,6 +24,9 @@ var mySlider = {
     scrollThreshold: 400,
     lastFixedPos: 0,
     slider: '.row',
+    music: '.music-control',
+    player: '.audio-player',
+    volume: 0.6,
     activeSlide: '.slide.active',
     button: '.next-button',
     buttonAlt: '.slider-nav',
@@ -40,6 +43,8 @@ var mySlider = {
     //$.extend(mySlider.config, config);
     mySlider.disableScroll();
     this.createNav();
+    mySlider.playAudio();
+    // $(mySlider.config.player)[0].currentTime = 20;
     var y = '';
     $(window).on('wheel', function(e) {
 
@@ -67,20 +72,24 @@ var mySlider = {
         }
     });
     $(mySlider.config.button).
-        click(function() {
-          mySlider.animateSlide($(mySlider.config.button));
+      click(function() {
+        mySlider.animateSlide($(mySlider.config.button));
     });
     $(mySlider.config.buttonAlt).
       click(function(e) {
         mySlider.animateToX($(this), e);
     });
     $(mySlider.config.buttonUp).
-    click(function() {
-      mySlider.animateSlideBack($(mySlider.config.buttonUp));
+      click(function() {
+        mySlider.animateSlideBack($(mySlider.config.buttonUp));
     });
     $(mySlider.config.buttonBegin).
       click(function() {
         mySlider.setupSpace();
+    });
+    $(mySlider.config.music).
+      click(function() {
+        mySlider.audioHelper();
     });
   },
 
@@ -99,24 +108,41 @@ var mySlider = {
   },
 
   disableScroll : function() {
-  if (window.addEventListener) // older FF
-    window.addEventListener('DOMMouseScroll', mySlider.preventDefault, false);
-  window.onwheel = mySlider.preventDefault; // modern standard
-  window.onmousewheel = document.onmousewheel = mySlider.preventDefault; // older browsers, IE
-  window.ontouchmove  = mySlider.preventDefault; // mobile
-  document.onkeydown  = mySlider.preventDefaultForKeys;
-  console.log('Disabling scroll');
- },
+    if (window.addEventListener) // older FF
+      window.addEventListener('DOMMouseScroll', mySlider.preventDefault, false);
+    window.onwheel = mySlider.preventDefault; // modern standard
+    window.onmousewheel = document.onmousewheel = mySlider.preventDefault; // older browsers, IE
+    window.ontouchmove  = mySlider.preventDefault; // mobile
+    document.onkeydown  = mySlider.preventDefaultForKeys;
+    console.log('Disabling scroll');
+  },
 
- enableScroll : function () {
-  if (window.removeEventListener)
-    window.removeEventListener('DOMMouseScroll', mySlider.preventDefault, false);
-  window.onmousewheel = document.onmousewheel = null;
-  window.onwheel = null;
-  window.ontouchmove = null;
-  document.onkeydown = null;
-  console.log('Enabling scroll');
- },
+  enableScroll : function() {
+    if (window.removeEventListener)
+      window.removeEventListener('DOMMouseScroll', mySlider.preventDefault, false);
+    window.onmousewheel = document.onmousewheel = null;
+    window.onwheel = null;
+    window.ontouchmove = null;
+    document.onkeydown = null;
+    console.log('Enabling scroll');
+  },
+
+  audioHelper : function() {
+    $(mySlider.config.music).toggleClass('muted');
+    if( $(mySlider.config.player)[0].paused == false)
+      $(mySlider.config.player)[0].pause();
+    else
+      $(mySlider.config.player)[0].play();
+  },
+
+  playAudio : function() {
+    $(mySlider.config.player).prop("volume", mySlider.config.volume);
+    $(mySlider.config.player)[0].play();
+  },
+
+  pauseAudio : function() {
+    $(mySlider.config.player)[0].pause();
+  },
 
   setupSpace : function() {
     mySlider.enableScroll();
@@ -399,6 +425,15 @@ $(window).load(function() {
   $('.animate-in').addClass('active');
   $('.fade-in').addClass('active');
 });
+$(window).blur(function() {
+  mySlider.pauseAudio();
+});
+$(window).focus(function() {
+  if( $('.music-control.muted').length )
+    return
+  else
+    mySlider.playAudio();
+});
 $(document).ready(function() {
   mySlider.init();
   $(".animsition").animsition({
@@ -425,5 +460,4 @@ $(document).ready(function() {
       window.location.href = url;
     }
   });
-  $(".text-loading-overlay").addClass("is-revealed");
 });

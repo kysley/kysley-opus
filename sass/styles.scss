@@ -339,7 +339,9 @@ body {
   }
 }
 .opus-container {
-  & span {
+  top: 13vh;
+  position: absolute;
+  .pretty-year {
     position: absolute;
     -webkit-transform: rotate(-90deg);
             transform: rotate(-90deg);
@@ -352,31 +354,55 @@ body {
     font-family: ZSR;
   }
 }
+.opus-self {
+  margin-top: 1em;
+  p {
+    letter-spacing: .02em;
+    color: $white;
+    font-family: HK;
+    .first {
+      color: $orange;
+      display: inline-block;
+      position: initial;
+      font-size: 6rem;
+      font-family: ZSR;
+      line-height: .5;
+      margin-left: -.5em;
+      margin-right: -.2em;
+    }
+    .highlight-green {
+      color: $green;
+    }
+    .afterline {
+
+    }
+  }
+}
 .opus-quote {
   top: 25vh;
-  width: 20vw;
+  /* width: 20vw; */
   left: 20vw;
-  position: absolute;
+  /* position: absolute; */
   font-family: HKBold;
   text-align: justify;
   color: $white;
   border: 10px solid $white;
   padding: 3rem;
-  & h1 {
+  h1 {
     text-transform: uppercase;
     letter-spacing: .5em;
     line-height: 2;
     font-size: 2rem;
   }
-  & h2 {
+  h2 {
     font-family: HK;
-    position: absolute;
+    /* position: absolute; */
     text-transform: uppercase;
     letter-spacing: .5em;
     font-size: 1rem;
     background-color: $black;
     left: -10px;
-   margin-top: 3em;
+    margin-top: 3em;
   }
 }
 .emphasize {
@@ -400,12 +426,33 @@ body {
   font-family: ZSR;
   width: 100px;
 }
-svg.mask {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
+.music-wrapper {
+  top: 7.7em;
+  right: 3em;
+  position: fixed;
+  width: 1.75rem;
+  height: 1.75rem;
+  fill: $white;
+}
+.music-control {
+  &.muted {
+    .speaker-mute {
+      opacity: 1 !important;
+    }
+    .speaker {
+      opacity: 0 !important;
+    }
+  }
+  svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .speaker-mute {
+    opacity: 0;
+  }
 }
 .button-begin {
   position: relative;
