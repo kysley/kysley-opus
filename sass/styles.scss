@@ -1,19 +1,25 @@
 @font-face {
   font-family: HKBold;
+  src: url('../font/HKGrotesk-Bold.eot'); /* IE9 Compat Modes */
+  src: url('../font/HKGrotesk-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../font/HKGrotesk-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../font/HKGrotesk-Bold.otf')  format('opentype'); /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: HK;
+  src: url('../font/HKGrotesk-Regular.eot'); /* IE9 Compat Modes */
+  src: url('../font/HKGrotesk-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../font/HKGrotesk-Regular.woff') format('woff'); /* Pretty Modern Browsers */
+       /* url('HKGrotesk-Regular.otf')  format('opentype'); /* Safari, Android, iOS */
+}
+/* @font-face {
+  font-family: HKBold;
   src: url(../font/HKGrotesk-Bold.otf);
 }
 @font-face {
   font-family: HK;
   src: url(../font/HKGrotesk-Light.otf);
-}
-@font-face {
-  font-family: KBold;
-  src: url(../font/Kollektif-Bold.ttf);
-}
-@font-face {
-  font-family: K;
-  src: url(../font/Kollektif.ttf);
-}
+} */
 @font-face {
   font-family: ZSR;
   src: url(../font/ZefaniStencil-Regular.otf);
@@ -26,9 +32,10 @@ $blue: #9AC4F8;
 $green: #99EDCC;
 $white: #fff;
 $black: #1a1a1a;
+$cream: #e9e8e8;
 
 body {
-  font-family: K !important;
+  font-family: HK !important;
   background: $black;
   margin: 0;
   padding: 0;
@@ -76,7 +83,7 @@ body {
   left: 0;
   width: 100%;
   padding: 4rem 3rem 2rem;
-  z-index: 20;
+  z-index: 1001;
   .header {
     position: relative;
     display: block;
@@ -151,6 +158,10 @@ body {
     span {
       font-weight: 100;
     }
+    .nav-visible & {
+      background: $cream;
+      -webkit-text-fill-color: $black;
+    }
   }
 }
 .slider-content {
@@ -212,12 +223,28 @@ body {
     &.bigger {
       width: 48%;
     }
+    &.offshore {
+      width: 70em;
+    }
+    &.tempest {
+      width: 38em;
+    }
+    &.crncy {
+      width: 42em;
+    }
+    &.rgbhex {
+
+    }
+    &.whiteandred {
+
+    }
     h1 {
       font-size: 9rem;
       margin: 0;
       line-height: 1;
       margin-bottom: 1rem;
       font-weight: 900;
+      text-align: left;
     }
     h2 {
       font-size: 2rem;
@@ -228,7 +255,7 @@ body {
   position: absolute;
   left: 3em;
   top: 22em;
-  z-index: 999;
+  z-index: 900;
   opacity: 0;
   ul {
     position: relative;
@@ -267,7 +294,7 @@ body {
   top: 45vh;
   text-align: left;
   /* cursor: pointer; */
-  z-index: 999;
+  z-index: 900;
   width: 12%;
   .next-color {
     position: relative;
@@ -317,6 +344,16 @@ body {
   bottom: 5rem;
   right: 4rem;
   z-index: 10;
+  opacity: 0;
+  transition: opacity 200ms cubic-bezier(0.77, 0, 0.175, 1), z-index 0s 200ms;
+  .nav-visible & {
+    opacity: 1;
+    z-index: 999;
+    transition-property: opacity;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+    transition-delay: 700ms;
+  }
   ul {
     list-style: none;
     margin: 0;
@@ -333,6 +370,7 @@ body {
     margin: 0 1rem;
   }
   a {
+    color: $black;
     text-decoration: none;
     font-size: 1.8rem;
     font-weight: 700;
@@ -352,6 +390,118 @@ body {
     top: 65vh;
     font-size: 12rem;
     font-family: ZSR;
+  }
+}
+.nav-overlay {
+  background-color: $cream;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 200ms cubic-bezier(0.77, 0, 0.175, 1), z-index 0s 200ms;
+  .nav-visible & {
+    opacity: 1;
+    z-index: 999;
+    transition-property: opacity;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+    transition-delay: 0s;
+  }
+}
+.nav {
+  position: fixed;
+  left: 2.5em;
+  right: 2.5em;
+  top: 35em;
+  bottom: 0;
+  opacity: 0;
+  z-index: -1;
+  .nav-visible & {
+    opacity: 1;
+    z-index: 1000;
+  }
+  ul {
+    height: 100%;
+    max-height: 30em;
+  }
+  li {
+    overflow: hidden;
+    opacity: 0;
+    list-style: none;
+    padding: 1em;
+    width: 50em;
+    .nav-visible & {
+      opacity: 1;
+      transition-property: opacity;
+      transition-duration: 0.75s;
+      transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+      transition-delay: 0s;
+    }
+    &:after {
+      display: block;
+      content: '';
+      /* width: 200px; */
+      height: 4em;
+      width: 4em;
+      top: -4.5em;
+      position: relative;
+      opacity: 1;
+      transition-property: transform;
+      transition-duration: 0.75s;
+      transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+      transition-delay: 0s;
+      z-index: 0;
+    }
+    &:hover:after {
+      transform: translateY(-2em);
+
+    }
+    &:nth-child(1):after {
+      background: $orange;
+    }
+    &:nth-child(2):after {
+      background: $blue;
+    }
+    &:nth-child(3):after {
+      background: $green;
+    }
+    &:nth-child(4):after {
+      background: $pink;
+    }
+    @for $i from 1 through 5 {
+      .nav-visible &:nth-child(#{$i}) {
+        transition-delay: $i * .1s;
+
+        a span {
+          transition-delay: $i * .1s;
+        }
+      }
+    }
+  }
+  a {
+    padding-left: 5rem;
+    text-transform: uppercase;
+    position: relative;
+    color: $black;
+    font-family: HKBold;
+    span {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: 1rem;
+      opacity: 0;
+      display: inline-block;
+      transform: translateX(10em);
+      .nav-visible & {
+        opacity: 1;
+        transform: translateX(0rem);
+        transition-property: opacity, transform;
+        transition-duration: .2s;
+        transition-timing-function: cubic-bezier(.165,.84,.44,1);
+      }
+    }
   }
 }
 .opus-self {
@@ -433,6 +583,9 @@ body {
   width: 1.75rem;
   height: 1.75rem;
   fill: $white;
+  .nav-visible & {
+    fill: $black;
+  }
 }
 .music-control {
   &.muted {
@@ -533,6 +686,15 @@ body {
   background-position: 100% 0;
   background-size: 200% 100%;
 }
+.pink-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  background: -webkit-linear-gradient(0deg, $pink 50%, transparent 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-position: 100% 0;
+  background-size: 200% 100%;
+}
 .black-text {
   -webkit-background-clip: text;
   background-clip: text;
@@ -619,9 +781,18 @@ body {
   -webkit-animation: anime 1.2s 0.5s cubic-bezier(0.860, 0.000, 0.070, 1.000) forwards;
           animation: anime 1.2s 0.5s cubic-bezier(0.860, 0.000, 0.070, 1.000) forwards;
 }
-.animate-in.stagger.active:after {
+.animate-in.stagger.active:after,
+.animate-in-late.stagger.active:after {
   -webkit-animation: anime 1.2s 0.8s cubic-bezier(0.860, 0.000, 0.070, 1.000) forwards;
           animation: anime 1.2s 0.8s cubic-bezier(0.860, 0.000, 0.070, 1.000) forwards;
+}
+@keyframes hov {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(3em);
+  }
 }
 @-webkit-keyframes opac {
   0% {
