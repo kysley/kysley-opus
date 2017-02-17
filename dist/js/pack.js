@@ -36,6 +36,9 @@ var mySlider = {
     transition: 600,
     delay: function() {return this.transition;},
     navigation: '.control-nav',
+    menuActi: '.menu-wrapper',
+    menuOverlay: '.nav-overlay',
+    menuSelf: '.nav',
     mainText: '.color-key'
   },
 
@@ -91,6 +94,10 @@ var mySlider = {
       click(function() {
         mySlider.audioHelper();
     });
+    $(mySlider.config.menuActi).
+      click(function() {
+        mySlider.menuHelper();
+    });
   },
 
   preventDefault : function(e) {
@@ -125,6 +132,10 @@ var mySlider = {
     window.ontouchmove = null;
     document.onkeydown = null;
     console.log('Enabling scroll');
+  },
+
+  menuHelper : function() {
+    $('html').toggleClass('nav-visible');
   },
 
   audioHelper : function() {
@@ -433,6 +444,9 @@ $(window).focus(function() {
     return
   else
     mySlider.playAudio();
+});
+$(window).on('beforeunload', function() {
+  $(this).scrollTop(0);
 });
 $(document).ready(function() {
   mySlider.init();
