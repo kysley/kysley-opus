@@ -47,7 +47,7 @@ var mySlider = {
     mySlider.disableScroll();
     this.createNav();
     mySlider.playAudio();
-    // $(mySlider.config.player)[0].currentTime = 20;
+    $(mySlider.config.player)[0].currentTime = 20;
     var y = '';
     $(window).on('wheel', function(e) {
 
