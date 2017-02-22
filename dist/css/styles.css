@@ -28,6 +28,18 @@
   src: url(../font/ZefaniStencil-Regular.otf);
 }
 
+.pink {
+  color: #E4457D;
+}
+
+.orange {
+  color: #F0B67F;
+}
+
+.blue {
+  color: #9AC4F8;
+}
+
 body {
   font-family: HK !important;
   background: #1a1a1a;
@@ -415,6 +427,26 @@ img {
   text-decoration: none;
   font-size: 1.8rem;
   font-weight: 700;
+}
+
+.about-wrapper {
+  margin-top: 20vh;
+}
+
+.about-wrapper .main {
+  margin-left: 50%;
+}
+
+.about-wrapper .about-stylzd {
+  font-size: 3rem;
+  margin-bottom: 0;
+  color: #e9e8e8;
+  font-family: HKBold;
+}
+
+.about-wrapper .shove-down {
+  margin-top: 4rem;
+  position: absolute;
 }
 
 .opus-container {

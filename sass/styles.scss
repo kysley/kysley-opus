@@ -26,9 +26,18 @@
 }
 
 $pink: #E4457D;
+.pink {
+  color: $pink;
+}
 $orange: #F0B67F;
+.orange {
+  color: $orange;
+}
 $yellow: #FBE96B;
 $blue: #9AC4F8;
+.blue {
+  color: $blue;
+}
 $green: #99EDCC;
 $white: #fff;
 $black: #1a1a1a;
@@ -376,6 +385,22 @@ body {
     font-weight: 700;
   }
 }
+.about-wrapper {
+  margin-top: 20vh;
+  .main {
+    margin-left: 50%;
+    }
+  .about-stylzd {
+    font-size: 3rem;
+    margin-bottom: 0;
+    color: $cream;
+    font-family: HKBold;
+  }
+  .shove-down {
+    margin-top: 4rem;
+    position: absolute;
+  }
+}
 .opus-container {
   top: 13vh;
   position: absolute;
@@ -522,9 +547,6 @@ body {
     }
     .highlight-green {
       color: $green;
-    }
-    .afterline {
-
     }
   }
 }
