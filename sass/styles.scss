@@ -34,6 +34,9 @@ $orange: #F0B67F;
   color: $orange;
 }
 $yellow: #FBE96B;
+.yellow {
+  color: $yellow;
+}
 $blue: #9AC4F8;
 .blue {
   color: $blue;
@@ -166,6 +169,10 @@ body {
     font-weight: 700;
     span {
       font-weight: 100;
+    }
+    a {
+      text-decoration: none;
+      color: initial;
     }
     .nav-visible & {
       background: $cream;
@@ -387,9 +394,6 @@ body {
 }
 .about-wrapper {
   margin-top: 20vh;
-  .main {
-    margin-left: 50%;
-    }
   .about-stylzd {
     font-size: 3rem;
     margin-bottom: 0;
@@ -399,6 +403,12 @@ body {
   .shove-down {
     margin-top: 4rem;
     position: absolute;
+  }
+  .main {
+    p {
+      font-size: 2rem;
+      color: $cream;
+    }
   }
 }
 .opus-container {
@@ -484,6 +494,7 @@ body {
       transform: translateY(-2em);
 
     }
+    /* &:nth-child(1){text-shadow: $orange 3px 2px 0px;} */
     &:nth-child(1):after {
       background: $orange;
     }
@@ -508,13 +519,13 @@ body {
   }
   a {
     padding-left: 5rem;
-    text-transform: uppercase;
+    text-transform: lowercase;
     position: relative;
     color: $black;
     font-family: HKBold;
     span {
       font-size: 3rem;
-      font-weight: 800;
+      font-weight: bold;
       letter-spacing: 1rem;
       opacity: 0;
       display: inline-block;
