@@ -44,6 +44,14 @@
   color: #9AC4F8;
 }
 
+.green {
+  color: #99EDCC;
+}
+
+.white {
+  color: #fff;
+}
+
 body {
   font-family: HK !important;
   background: #1a1a1a;
@@ -258,6 +266,21 @@ img {
   opacity: 0;
 }
 
+.other-wrapper {
+  position: absolute;
+  left: 40em;
+  top: 30vh;
+}
+
+.other-wrapper .other {
+  font-size: 4rem;
+  margin: 1em;
+}
+
+.other-wrapper .other a {
+  color: inherit;
+}
+
 .title-wrapper {
   position: absolute;
   left: 30em;
@@ -438,23 +461,35 @@ img {
   font-weight: 700;
 }
 
-.about-wrapper {
+.about-wrapper, .talk-wrapper {
   margin-top: 20vh;
 }
 
-.about-wrapper .about-stylzd {
+.about-wrapper .talk-head, .talk-wrapper .talk-head {
+  color: #fff;
+  font-size: 18rem;
+  margin-bottom: 0;
+}
+
+.about-wrapper .talk-main, .talk-wrapper .talk-main {
+  color: #99EDCC;
+  font-family: HKBold;
+  font-size: 10rem;
+}
+
+.about-wrapper .about-stylzd, .talk-wrapper .about-stylzd {
   font-size: 3rem;
   margin-bottom: 0;
   color: #e9e8e8;
   font-family: HKBold;
 }
 
-.about-wrapper .shove-down {
+.about-wrapper .shove-down, .talk-wrapper .shove-down {
   margin-top: 4rem;
   position: absolute;
 }
 
-.about-wrapper .main p {
+.about-wrapper .main p, .talk-wrapper .main p {
   font-size: 2rem;
   color: #e9e8e8;
 }

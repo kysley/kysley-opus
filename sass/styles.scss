@@ -42,7 +42,13 @@ $blue: #9AC4F8;
   color: $blue;
 }
 $green: #99EDCC;
+.green {
+  color: $green;
+}
 $white: #fff;
+.white {
+  color: $white;
+}
 $black: #1a1a1a;
 $cream: #e9e8e8;
 
@@ -231,6 +237,18 @@ body {
     left: 24vw;
     opacity: 0;
   }
+  .other-wrapper {
+    position: absolute;
+    left: 40em;
+    top: 30vh;
+    .other {
+      font-size: 4rem;
+      margin: 1em;
+      & a {
+        color: inherit;
+      }
+    }
+  }
   .title-wrapper {
     position: absolute;
     left: 30em;
@@ -392,8 +410,18 @@ body {
     font-weight: 700;
   }
 }
-.about-wrapper {
+.about-wrapper, .talk-wrapper {
   margin-top: 20vh;
+  .talk-head {
+    color: $white;
+    font-size: 18rem;
+    margin-bottom: 0;
+  }
+  .talk-main {
+    color: $green;
+    font-family: HKBold;
+    font-size: 10rem;
+  }
   .about-stylzd {
     font-size: 3rem;
     margin-bottom: 0;

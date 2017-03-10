@@ -26,7 +26,7 @@ var mySlider = {
     slider: '.row',
     music: '.music-control',
     player: '.audio-player',
-    volume: 0.6,
+    volume: 0.0,
     activeSlide: '.slide.active',
     button: '.next-button',
     buttonAlt: '.slider-nav',
@@ -314,7 +314,7 @@ var mySlider = {
     console.log("next anchor jump: " + anchor);
 
     var _this = mySlider.numberToObj(anchor);
-    var _activeSlide = $('body').find("[data-order='" + activeSlide[0] + "']");
+    var _activeSlide = $('body').find("[data-order='" + activeSlide + "']");
     console.log(_this);
     console.log($(_this).offset().top);
 
@@ -328,6 +328,7 @@ var mySlider = {
     buttonAlt.css('pointer-events', 'none');
     nextSlide.css('z-index', 10);
     $(_this).addClass('active').css('opacity', 1);
+    button.prev().find('.normal').html(mySlider.getXSlideColorAndName(_this).name);
 
     setTimeout(function() {
       _activeSlide.removeClass('active').css('opacity', 0);
@@ -360,7 +361,7 @@ var mySlider = {
     buttonSpace.css('pointer-events', 'none');
     $(_this).css('z-index', 10);
     $(_this).addClass('active');
-    button.find('.normal').html(mySlider.getNextSlideColorAndName().name);
+    $('.normal').html(mySlider.getXSlideColorAndName(_this).name);
 
     animateMe.addClass('active');
 
